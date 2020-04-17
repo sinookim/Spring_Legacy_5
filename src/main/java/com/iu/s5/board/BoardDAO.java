@@ -1,6 +1,7 @@
 package com.iu.s5.board;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardDAO {
 	//멤버변수 상수
@@ -9,21 +10,23 @@ public interface BoardDAO {
 	//생략해도 자동으로 만들어짐
 	
 	//List
-	public List<BoardVO> boardList() throws Exception;
+	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception;
 	
 	//select
-	public BoardVO boardSelect() throws Exception;
+	public BoardVO boardSelect(long num) throws Exception;
 	
 	//insert
-	public int boardWrite(BoardVO boardVO) throws Exception;
+	public int boardWrite(BoardVO boardVO)throws Exception;
 
 	//delete
-	public int boardDelete(long num) throws Exception;
+	public int boardDelete(long num)throws Exception;
 	
 	//update
 	public int boardUpdate(BoardVO boardVO) throws Exception;
 	
-	//update hit?
-	public int boardUpdateHit(BoardVO boardVO) throws Exception;
+	//hit update
+	public int hitUpdate(long num)throws Exception;
 	
+	//count
+	public long boardCount() throws Exception;
 }
