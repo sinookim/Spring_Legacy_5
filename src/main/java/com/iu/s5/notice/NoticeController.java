@@ -62,8 +62,6 @@ public class NoticeController {
 		return path;
 	}
 	
-	
-	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
 	public String boardWrite()throws Exception{
 		return "board/boardWrite";
