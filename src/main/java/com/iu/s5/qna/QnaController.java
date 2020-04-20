@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s5.board.BoardVO;
+import com.iu.s5.board.page.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -25,15 +25,19 @@ public class QnaController {
 		return "qna";
 	}
 
-	// Delete
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
 	public ModelAndView boardDelete(long num, ModelAndView mv) throws Exception {
 		int result = qnaService.boardDelete(num);
+		if(result>0) {
+			mv.addObject("result", "Delete Success");
+		}else {
+			mv.addObject("result", "Delete Fail");
+		}
 		mv.addObject("path", "./qnaList");
+		mv.setViewName("common/result");
 		return mv;
 	}
 
-	//Upate
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
 	public String qnaUpdate(long num, Model model) throws Exception {
 		BoardVO boardVO = qnaService.boardSelect(num);
@@ -86,9 +90,10 @@ public class QnaController {
 	
 	//List
 	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
-	public ModelAndView boardList(@RequestParam(defaultValue = "1") int curPage, ModelAndView mv)throws Exception{
+	public ModelAndView boardList(Pager pager, ModelAndView mv)throws Exception{
 		
-		 List<BoardVO> ar = qnaService.boardList(curPage);
+		List<BoardVO> ar = qnaService.boardList(pager);
+		 System.out.println(pager.getTotalPage());
 		 mv.addObject("list", ar);
 		 mv.setViewName("board/boardList");
 		 return mv;

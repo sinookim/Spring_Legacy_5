@@ -1,4 +1,4 @@
-package com.iu.s5.notice;
+package com.iu.s5.member;
 
 import java.util.List;
 
@@ -10,44 +10,44 @@ import com.iu.s5.board.BoardVO;
 import com.iu.s5.board.page.Pager;
 
 @Service
-public class NoticeService implements BoardService {
-	
+public class MemberService implements BoardService{
+
 	@Autowired
-	private NoticeDAO noticeDAO;
+	private MemberDAO memberDAO;
 
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
-		
+
 		pager.makeRow();
-		long totalCount = noticeDAO.boardCount(pager);
+		long totalCount = memberDAO.boardCount(pager);
 		pager.makePage(totalCount);
-		
-		return noticeDAO.boardList(pager);
+
+		return memberDAO.boardList(pager);
 	}
 
 	@Override
 	public BoardVO boardSelect(long num) throws Exception {
 		// TODO Auto-generated method stub
-		noticeDAO.hitUpdate(num);
-		return noticeDAO.boardSelect(num);
+		memberDAO.hitUpdate(num);
+		return memberDAO.boardSelect(num);
 	}
 
 	@Override
 	public int boardWrite(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.boardWrite(boardVO);
+		return memberDAO.boardWrite(boardVO);
 	}
 
 	@Override
 	public int boardUpdate(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.boardUpdate(boardVO);
+		return memberDAO.boardUpdate(boardVO);
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.boardDelete(num);
+		return memberDAO.boardDelete(num);
 	}
 
 }

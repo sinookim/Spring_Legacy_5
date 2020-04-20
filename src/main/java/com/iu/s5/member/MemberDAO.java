@@ -1,4 +1,4 @@
-package com.iu.s5.notice;
+package com.iu.s5.member;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ import com.iu.s5.board.BoardVO;
 import com.iu.s5.board.page.Pager;
 
 @Repository
-public class NoticeDAO implements BoardDAO {
+public class MemberDAO implements BoardDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.iu.s5.notice.NoticeDAO.";
+	private final String NAMESPACE = "com.iu.s5.member.MemberDAO.";
 
 	@Override
 	public long boardCount(Pager pager) throws Exception {

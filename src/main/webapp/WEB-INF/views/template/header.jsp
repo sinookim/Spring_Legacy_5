@@ -19,6 +19,8 @@
         </ul>
       </li>
       <li><a href="${pageContext.request.contextPath}/notice/noticeList">NOTICE</a></li>
+      <li><a href="${pageContext.request.contextPath}/qna/qnaList">Q&A</a></li>
+      <li><a href="${pageContext.request.contextPath}/member/memberList">Member</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <c:if test="${empty member}">
