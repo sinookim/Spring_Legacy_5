@@ -3,6 +3,7 @@ package com.iu.s5.qna;
 import com.iu.s5.board.BoardVO;
 
 public class QnaVO extends BoardVO{
+	
 	private long ref;
 	private long step;
 	private long depth;
@@ -27,4 +28,5 @@ public class QnaVO extends BoardVO{
 	}
 	
 	
+
 }

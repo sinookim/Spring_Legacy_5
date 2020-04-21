@@ -10,13 +10,14 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<br>
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal" action="./memberLogin" method="post">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="id">ID:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="id" placeholder="Enter ID" name="id">
+						<input type="text" class="form-control" id="id" value="${cookie.cId.value}" placeholder="Enter ID" name="id">
 					</div>
 				</div>
 				
@@ -32,7 +33,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<div class="checkbox">
-							<label><input type="checkbox" name="remember">Remember me</label>
+							<label><input type="checkbox" name="remember" value="remember">Remember me</label>
 						</div>
 					</div>
 				</div>

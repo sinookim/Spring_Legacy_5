@@ -2,16 +2,16 @@ package com.iu.s5.member;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s5.util.Pager;
@@ -61,12 +61,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value= "memberLogin")
-	public void memberLogin() {
-		
+	public void memberLogin(@CookieValue(value = "cId", required = false) String cId, Model model) {
+		System.out.println(cId);
+		//model.addAttribute("cId", cId);
 	}
 	
 	@RequestMapping(value= "memberLogin", method = RequestMethod.POST)
-	public ModelAndView memberLogin(ModelAndView mv, MemberVO memberVO, HttpSession session) throws Exception {
+	public ModelAndView memberLogin(ModelAndView mv,String remember, MemberVO memberVO, HttpSession session, HttpServletResponse response) throws Exception {
+		Cookie cookie = new Cookie("cId", "");
+		
+		if(remember != null) {
+			/* cookie = new Cookie("cId", memberVO.getId()); */
+			cookie.setValue(memberVO.getId());
+		}
+		
+		/* cookie.setMaxAge(0); */
+		/* cookie.setValue(newValue); */
+		response.addCookie(cookie);
 		
 		 memberVO = memberService.memberLogin(memberVO);
 		
