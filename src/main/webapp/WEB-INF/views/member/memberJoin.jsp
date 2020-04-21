@@ -14,7 +14,7 @@
 <br>
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal" action="./memberJoin" method="post">
+			<form class="form-horizontal" action="./memberJoin" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="id">ID:</label>
 					<div class="col-sm-10">
