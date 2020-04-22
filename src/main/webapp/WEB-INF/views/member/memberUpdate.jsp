@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="name">Name:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="name" value="${member.name}"; placeholder="Enter Name" name="name">
+						<input type="text" class="form-control" id="name" value="${member.name}" placeholder="Enter Name" name="name">
 					</div>
 				</div>
 				
@@ -49,7 +49,14 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="age" value="${member.age}" placeholder="Enter Age" name="age">
 					</div>
-				</div>				
+				</div>	
+				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="age">Age:</label>
+					<div class="col-sm-10">
+						<input type="file" class="form-control" id="avatar" value="${member.age}" name="avatar">
+					</div>
+				</div>			
 						
 				
 				<div class="form-group">
@@ -57,6 +64,8 @@
 						<button type="submit" class="btn btn-default">Submit</button>
 					</div>
 				</div>
+				
+				
 			</form>
 
 		</div>
