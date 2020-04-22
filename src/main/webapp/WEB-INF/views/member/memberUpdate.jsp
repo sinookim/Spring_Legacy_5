@@ -41,7 +41,7 @@
 					<label class="control-label col-sm-2" for="phone">Phone:</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="phone" value="${member.phone}" placeholder="Enter Phone" name="phone">
-					</div>
+					</div> 
 				</div>		
 				
 				<div class="form-group">
@@ -56,8 +56,7 @@
 					<div class="col-sm-10">
 						<input type="file" class="form-control" id="avatar" value="${member.age}" name="avatar">
 					</div>
-				</div>			
-						
+				</div>
 				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
