@@ -6,6 +6,7 @@
 <mapper namespace="com.iu.s5.member.MemberDAO">
 	<resultMap type="MemberVO" id="loginResult">
 		<id column="id" property="id" />
+		<result column="pw" property="pw" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
 		<result column="phone" property="phone" />
