@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
 <c:import url="../template/header_sub.jsp"></c:import>
@@ -36,5 +37,13 @@
 		</form>
 		
 	</div>
+	<script type="text/javascript">
+	$('#contents').summernote({
+		  height: 300,                 // set editor height
+		  minHeight: null,             // set minimum height of editor
+		  maxHeight: null,             // set maximum height of editor
+		  focus: true                  // set focus to editable area after initializing summernote
+		});
+	</script>
 </body>
 </html>

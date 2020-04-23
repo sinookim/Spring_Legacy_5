@@ -1,6 +1,8 @@
 package com.iu.s5.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -18,11 +20,11 @@ import com.iu.s5.util.Pager;
 
 @Service
 public class NoticeService implements BoardService {
-
+	
 	@Autowired
 	private NoticeDAO noticeDAO;
 	@Autowired
-	private FileSaver filesaver;
+	private FileSaver fileSaver;
 	@Autowired
 	private ServletContext servletContext;
 	@Autowired
@@ -30,11 +32,11 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
-
+		
 		pager.makeRow();
 		long totalCount = noticeDAO.boardCount(pager);
 		pager.makePage(totalCount);
-
+		
 		return noticeDAO.boardList(pager);
 	}
 
@@ -46,26 +48,27 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
+	public int boardWrite(BoardVO boardVO, MultipartFile [] files) throws Exception {
 		// TODO Auto-generated method stub
-
-		String path = servletContext.getRealPath("/resources/uploadNotice");
-		//시퀀스 번호받기
+		
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		
+		//sequence 번호 받기
 		boardVO.setNum(noticeDAO.boardNum());
-		// noticeTable에 insert
+		//notice table insert
 		int result = noticeDAO.boardWrite(boardVO);
-
-		for (MultipartFile file : files) {
+		
+		for(MultipartFile file : files) {
 			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = filesaver.saveByTransfer(file, path);
-			boardFileVO.setFileName(fileName);
+			String fileName = fileSaver.saveByTransfer(file, path);
 			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
 			boardFileDAO.fileInsert(boardFileVO);
 		}
-
-		return result;// noticeDAO.boardWrite(boardVO);
+		return result;
 	}
 
 	@Override

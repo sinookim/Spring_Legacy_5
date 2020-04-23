@@ -21,7 +21,7 @@ public class NoticeDAO implements BoardDAO {
 	private final String NAMESPACE="com.iu.s5.notice.NoticeDAO.";
 	
 	public long boardNum() throws Exception{
-		return sqlSession.selectOne((NAMESPACE)+"boardNum");
+		return sqlSession.selectOne(NAMESPACE+"boardNum");
 	}
 	
 	@Override

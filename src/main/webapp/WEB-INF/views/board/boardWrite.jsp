@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
 	<c:import url="../template/header_sub.jsp"></c:import>
@@ -14,7 +15,8 @@
 		<h1>${board}Write Form</h1>
 
 
-		<form action="./${board}Write" id="frm" method="post" enctype="multipart/form-data">
+		<form action="./${board}Write" id="frm" method="post"
+			enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">Title:</label> <input type="text"
 					class="form-control" id="title" name="title">
@@ -28,17 +30,25 @@
 				<textarea rows="5" cols="" class="form-control" id="contents"
 					name="contents"></textarea>
 			</div>
-			<div class="form-group">
-				<label for="contents">file:</label>
-				<input type="file" name="files" class="form-group">
-				<input type="file" name="files" class="form-group">
-			</div>
 
+			<div class="form-group">
+				<label for="files">File:</label> <input type="file"
+					class="form-control" name="files"> <input type="file"
+					class="form-control" name="files">
+			</div>
 
 
 			<input type="submit" id="btn" class="btn btn-default" value="Write">
 		</form>
 
 	</div>
+	<script type="text/javascript">
+	$('#contents').summernote({
+		  height: 300,                 // set editor height
+		  minHeight: null,             // set minimum height of editor
+		  maxHeight: null,             // set maximum height of editor
+		  focus: true                  // set focus to editable area after initializing summernote
+		});
+	</script>
 </body>
 </html>

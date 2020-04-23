@@ -20,86 +20,90 @@ import com.iu.s5.util.Pager;
 @Controller
 @RequestMapping("/notice/**")
 public class NoticeController {
-
+	
 	@Autowired
 	private NoticeService noticeService;
-
+	
 	@ModelAttribute("board")
-	public String getBoard() throws Exception {
+	public String getBoard()throws Exception{
 		return "notice";
 	}
-
+	
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
-	public ModelAndView boardDelete(long num, ModelAndView mv) throws Exception {
+	public ModelAndView boardDelete(long num, ModelAndView mv)throws Exception{
 		int result = noticeService.boardDelete(num);
-		if (result > 0) {
+		if(result>0) {
 			mv.addObject("result", "Delete Success");
-		} else {
+		}else {
 			mv.addObject("result", "Delete Fail");
 		}
 		mv.addObject("path", "./noticeList");
 		mv.setViewName("common/result");
 		return mv;
 	}
-
+	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
-	public String boardUpdate(long num, Model model) throws Exception {
-		BoardVO boardVO = noticeService.boardSelect(num);
-		model.addAttribute("vo", boardVO);
+	public String boardUpdate(long num, Model model)throws Exception{
+		 BoardVO boardVO = noticeService.boardSelect(num);
+		 model.addAttribute("vo", boardVO);
 		return "board/boardUpdate";
 	}
-
+	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(NoticeVO noticeVO) throws Exception {
-
+	public String boardUpdate(NoticeVO noticeVO)throws Exception{
+		 
 		int result = noticeService.boardUpdate(noticeVO);
-		String path = "";
-
-		if (result > 0) {
-			path = "redirect:./noticeList";
-		} else {
-			path = "redirect:./noticeSelect?num=" + noticeVO.getNum();
+		String path="";
+		
+		if(result>0) {
+			path= "redirect:./noticeList";
+		}else {
+			path= "redirect:./noticeSelect?num="+noticeVO.getNum();
 		}
-
+		 
 		return path;
 	}
-
+	
+	
+	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
-	public String boardWrite() throws Exception {
+	public String boardWrite()throws Exception{
 		return "board/boardWrite";
 	}
-
+	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(NoticeVO noticeVO, ModelAndView mv, MultipartFile[] files) throws Exception {
+	public ModelAndView boardWrite(NoticeVO noticeVO,MultipartFile [] files, ModelAndView mv)throws Exception{
+
+		
+		
 		int result = noticeService.boardWrite(noticeVO, files);
-		if (result > 0) {
+		if(result>0) {
 			mv.setViewName("redirect:./noticeList");
-		} else {
+		}else {
 			mv.addObject("result", "Write Fail");
 			mv.addObject("path", "./noticeList");
 			mv.setViewName("common/result");
 		}
-
 		return mv;
 	}
-
-	@RequestMapping(value = "noticeSelect", method = RequestMethod.GET)
-	public ModelAndView boardSelect(long num) throws Exception {
+	
+	@RequestMapping(value="noticeSelect" , method = RequestMethod.GET)
+	public ModelAndView boardSelect(long num)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		BoardVO boardVO = noticeService.boardSelect(num);
 		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
 		return mv;
 	}
-
+	
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
-	public ModelAndView boardList(Pager pager, ModelAndView mv) throws Exception {
-
-		List<BoardVO> ar = noticeService.boardList(pager);
-		mv.addObject("list", ar);
-		mv.addObject("pager", pager);
-		mv.setViewName("board/boardList");
-		return mv;
+	public ModelAndView boardList(Pager pager, ModelAndView mv)throws Exception{
+		
+		 List<BoardVO> ar = noticeService.boardList(pager);
+		 mv.addObject("list", ar);
+		 mv.addObject("pager", pager);
+		 mv.setViewName("board/boardList");
+		 return mv;
 	}
 
 }
