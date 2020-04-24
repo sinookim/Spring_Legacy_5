@@ -1,10 +1,12 @@
 package com.iu.s5.notice;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -73,8 +75,6 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	public ModelAndView boardWrite(NoticeVO noticeVO,MultipartFile [] files, ModelAndView mv)throws Exception{
-
-		
 		
 		int result = noticeService.boardWrite(noticeVO, files);
 		if(result>0) {

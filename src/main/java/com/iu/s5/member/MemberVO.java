@@ -12,6 +12,8 @@ public class MemberVO {
 	private String phone;
 	private MemberFileVO memberFileVO;
 	
+	
+	
 	public MemberFileVO getMemberFileVO() {
 		return memberFileVO;
 	}
@@ -54,4 +56,7 @@ public class MemberVO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	
+
 }

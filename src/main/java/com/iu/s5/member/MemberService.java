@@ -23,6 +23,11 @@ public class MemberService {
 	@Autowired
 	private MemberFileDAO memberFileDAO;
 	
+	
+	public MemberVO memberIdCheck(MemberVO memberVO)throws Exception{
+		return memberDAO.memberIdCheck(memberVO);
+	}
+	
 	public List<MemberVO> memberList(Pager memberPager)throws Exception{
 		memberPager.makeRow();
 		long totalCount = memberDAO.memberCount(memberPager);
@@ -60,6 +65,8 @@ public class MemberService {
 		 result = memberFileDAO.fileInsert(memberFileVO);
 		return result;//memberDAO.memberJoin(memberVO);
 	}
+	
+
 	
 	public int fileDelete(String id, HttpSession session)throws Exception{
 		MemberFileVO memberFileVO = memberFileDAO.fileSelect(id);

@@ -12,8 +12,18 @@
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-
-	
+	<button id="btn">Button</button>
+	<script type="text/javascript">
+		$("#btn").click(function() {
+			//jquery Ajax
+			//Get
+			alert("start!");
+			$.get("./notice/noticeSelect?num=127", function(result) {
+				console.log(result);
+			});
+			alert("end!");
+		});
+	</script>
 </body>
 </html>
 

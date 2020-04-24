@@ -10,7 +10,6 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-<br>
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal" action="./memberLogin" method="post">

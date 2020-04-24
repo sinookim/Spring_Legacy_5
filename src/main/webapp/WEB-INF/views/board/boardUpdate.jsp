@@ -27,23 +27,17 @@
 		  </div>
 		 <div class="form-group" >
 		    <label for="contents">Contents:</label>
-		    <textarea rows="5" cols="" class="form-control" id="contents" name="contents">${vo.contents}</textarea>
+		    <textarea rows="5" cols="" class="form-control" id="contents" name="contents"></textarea>
 		  </div> 
-		  
-		  
-		  
 		  
 		  <input type="submit" id="btn" class="btn btn-default" value="Write">
 		</form>
 		
 	</div>
+	
 	<script type="text/javascript">
-	$('#contents').summernote({
-		  height: 300,                 // set editor height
-		  minHeight: null,             // set minimum height of editor
-		  maxHeight: null,             // set maximum height of editor
-		  focus: true                  // set focus to editable area after initializing summernote
-		});
+		$("#contents").summernote('code', '${vo.contents}');
 	</script>
+	
 </body>
 </html>

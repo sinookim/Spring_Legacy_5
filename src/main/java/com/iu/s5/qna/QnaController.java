@@ -42,7 +42,8 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaWrite")
-	public ModelAndView boardWrite(QnaVO qnaVO, ModelAndView mv, MultipartFile[] files) throws Exception {
+	public ModelAndView boardWrite(QnaVO qnaVO,MultipartFile [] files, ModelAndView mv) throws Exception {
+		
 		int result = qnaService.boardWrite(qnaVO, files);
 		String msg = "Qna write Fail";
 		if(result>0) {

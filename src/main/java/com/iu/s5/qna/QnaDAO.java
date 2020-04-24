@@ -17,10 +17,6 @@ public class QnaDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.iu.s5.qna.QnaDAO.";	//mapper namespace 경로랑 똑같아야함.
 	
-	public long boardNum() throws Exception{
-		return sqlSession.selectOne((NAMESPACE)+"boardNum");
-	}
-	
 	public int boardReplyUpdate(BoardVO boardVO)throws Exception{
 		return sqlSession.update(NAMESPACE+"boardReplyUpdate", boardVO);
 	}
