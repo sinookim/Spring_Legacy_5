@@ -79,9 +79,24 @@
 <script type="text/javascript">
 	$("#id").blur(function() {
 		var id = $("#id").val();
-		$.post("./memberIdCheck",{id:id}, function(data) {
-			alert(data);	
+
+		$.ajax({
+			type: "post",	//method 형식
+			url : "./memberIdCheck", //URL 주소
+			data : {
+				id: id
+			},	//parameter
+			success: function(r){
+				alert(r);
+			},
+			error : function() {
+				alert("error 발생");
+			}
+			
+			
+			
 		});
+		
 	});
 
 </script>

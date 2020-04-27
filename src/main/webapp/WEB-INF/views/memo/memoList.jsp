@@ -48,6 +48,7 @@
 				$("#result").append(result);
 			});	
 		}
+				
 	
 		getList(count);
 		
@@ -70,7 +71,6 @@
 			$.post("./memoInsert", {writer:writer, contents:contents}, function(result) {
 					result = result.trim();
 					if(result>0){
-						count=1;
 						location.reload();
 					}else {
 						alert("Write Fail");

@@ -28,15 +28,43 @@
 		 <div class="form-group" >
 		    <label for="contents">Contents:</label>
 		    <textarea rows="5" cols="" class="form-control" id="contents" name="contents"></textarea>
-		  </div> 
+		  </div>
+		  
+		  <div class="form-group" >
+		  	<label for="files">Files:</label>
+		  	<c:forEach items="${vo.boardFileVOs}" var="fileVO">
+			  	<p>${fileVO.oriName}<i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
+		  	</c:forEach>
+		  	
+		  </div>
+		   
 		  
 		  <input type="submit" id="btn" class="btn btn-default" value="Write">
 		</form>
 		
 	</div>
 	
+	 <!-- x버튼 클릭시 boardFileVO의 fileNum이 들어가야함 -->
+	
+	
 	<script type="text/javascript">
 		$("#contents").summernote('code', '${vo.contents}');
+		
+		$(".fileDelete").click(function() {
+			var s = $(this);
+			$.post("../boardFile/fileDelete", {fileNum:$(this).attr("id")}, function(data) {
+				if (data.trim()>0) {
+					s.parent().remove();
+					//부모 지우기
+					/* $("p").remove;
+					location.reload(true);
+					location.href = location.href;
+					history.go(0); */
+				} else {
+					alert("Fail");
+				}
+			} );
+		});
 	</script>
 	
 </body>

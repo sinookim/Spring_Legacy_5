@@ -33,15 +33,17 @@
 		  <div id="file">
 			  
 		  </div>
- 
+ 		<!-- contents Server null이 될때 
+ 		  <input type="hidden" name="contents" id="con">
+ 		--> 
 		  
 		  
 		  <input type="button" id="btn" class="btn btn-default" value="Write">
 		</form>
 		
 	</div>
-<script type="text/javascript" src="../resources/JS/boardForm.js">
-	
+<script type="text/javascript" src="../resources/js/boardForm.js">
+
 </script>	
 </body>
 </html>
