@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,13 +49,18 @@ public class NoticeController {
 	public String boardUpdate(long num, Model model)throws Exception{
 		 BoardVO boardVO = noticeService.boardSelect(num);
 		 model.addAttribute("vo", boardVO);
+		 NoticeVO noticeVO = (NoticeVO)boardVO;
+		 model.addAttribute("size", noticeVO.getBoardFileVOs().size());
+		 
 		return "board/boardUpdate";
 	}
 	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(NoticeVO noticeVO)throws Exception{
-		 
-		int result = noticeService.boardUpdate(noticeVO);
+	public String boardUpdate(NoticeVO noticeVO, MultipartFile [] files)throws Exception{
+
+		
+		
+		int result = noticeService.boardUpdate(noticeVO, files);
 		String path="";
 		
 		if(result>0) {

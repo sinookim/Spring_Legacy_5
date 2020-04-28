@@ -60,26 +60,56 @@ public class NoticeService implements BoardService {
 		int result = noticeDAO.boardWrite(boardVO);
 		
 		for(MultipartFile file : files) {
-			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = fileSaver.saveByTransfer(file, path);
-			boardFileVO.setNum(boardVO.getNum());
-			boardFileVO.setFileName(fileName);
-			boardFileVO.setOriName(file.getOriginalFilename());
-			boardFileVO.setBoard(1);
-			boardFileDAO.fileInsert(boardFileVO);
+			if(file.getSize()>0) {
+				BoardFileVO boardFileVO = new BoardFileVO();
+				String fileName = fileSaver.saveByTransfer(file, path);
+				boardFileVO.setNum(boardVO.getNum());
+				boardFileVO.setFileName(fileName);
+				boardFileVO.setOriName(file.getOriginalFilename());
+				boardFileVO.setBoard(1);
+				boardFileDAO.fileInsert(boardFileVO);
+			}
 		}
 		return result;
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return noticeDAO.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO, MultipartFile [] files) throws Exception {
+		
+		//HDD file save
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		int result = noticeDAO.boardUpdate(boardVO);
+		for(MultipartFile multipartFile:files) {
+			 
+			if(multipartFile.getSize()>0) {
+				BoardFileVO boardFileVO = new BoardFileVO();
+				
+				boardFileVO.setFileName(fileSaver.saveByUtils(multipartFile, path));
+				boardFileVO.setOriName(multipartFile.getOriginalFilename());
+				boardFileVO.setNum(boardVO.getNum());
+				boardFileVO.setBoard(1);
+				result = boardFileDAO.fileInsert(boardFileVO);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
-		// TODO Auto-generated method stub
+		List<BoardFileVO> list = boardFileDAO.fileList(num);
+		//1. HDD에 해당 파일들을 삭제
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		
+		for(BoardFileVO boardFileVO:list) {
+			fileSaver.deleteFile(boardFileVO.getFileName(), path);
+		}
+		
+		//2. DB에 삭제
+		boardFileDAO.fileDeleteAll(num);
+		
 		return noticeDAO.boardDelete(num);
 	}
 
