@@ -35,31 +35,56 @@
 		
 		if(ch1 && !ch2 && ch3){
 			//form 전송(submit event 강제 발생)
-			<!-- contents Server null이 될때
 			$("#con").val(contents);
-			-->
 			$("#frm").submit();
 		}else {
 			//submit event 종료
 			alert("필수 요소는 다 입력하세요");
 		}
-		
-		
-/* 		var contents = $("#contents").val();
-		console.log(title=='');
-		console.log(contents=="");
-		console.log(title.length);
-		console.log(contents.length);
-		
-		console.log($("#contents").summernote('isEmpty')); */
 	});
 	
 	
 	
 	// $("선택자").action();
 	$("#contents").summernote({
-		height: 300
+		height: 300,
+		callbacks:{
+			onImageUpload: function(file, editors) {
+				var format = new FormData(); 		//<form></form>
+				formData.append('files', files[0]);	//<input type="file" name="">
+				$.ajax({
+					type: "POST",
+					url: "../boardFile/fileInsert",
+					data: formData,
+					enctype:"multipart/form-data",
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(imgName){
+						imageName = imageName.trim();
+						$("#contents").summernote('editor.insertImage', imageName);
+					}
+				});
+			},	//onImageUpload
+			
+			onMediaDelete: function(files) {
+				var fileName = $(files[0]).attr("src");
+				fileName = fileName.substring(fileName.lastIndexOf("/"));
+				$.ajax({
+					type: "POST",
+					url: "../boardFile/summerDelete",
+					data:{
+						fileName: fileName
+					},
+					success: function(data) {
+						
+					}
+				});
+			}	//onMediaDelete
+			
+		}	//callback
 	});
+	
 	
 	
 	
