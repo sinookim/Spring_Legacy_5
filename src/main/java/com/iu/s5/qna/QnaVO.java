@@ -1,12 +1,16 @@
 package com.iu.s5.qna;
 
+import java.util.List;
+
 import com.iu.s5.board.BoardVO;
+import com.iu.s5.board.file.BoardFileVO;
 
 public class QnaVO extends BoardVO{
 	
 	private long ref;
 	private long step;
 	private long depth;
+	private List<BoardFileVO> boardFileVOs;
 	
 	public long getRef() {
 		return ref;
@@ -26,6 +30,13 @@ public class QnaVO extends BoardVO{
 	public void setDepth(long depth) {
 		this.depth = depth;
 	}
+	public List<BoardFileVO> getBoardFileVOs() {
+		return boardFileVOs;
+	}
+	public void setBoardFileVOs(List<BoardFileVO> boardFileVOs) {
+		this.boardFileVOs = boardFileVOs;
+	}
+	
 	
 	
 
