@@ -5,8 +5,12 @@
   
 <mapper namespace="com.iu.s5.board.file.BoardFileDAO">
 	
-	<insert id="fileInsert" parameterType="BoardFileVO">
+	<!-- <insert id="fileInsert" parameterType="BoardFileVO">
 		insert into boardFile values(file_seq.nextval, #{num}, #{fileName}, #{oriName}, #{board})
+	</insert> -->
+	
+	<insert id="fileInsert" parameterType="BoardFileVO">
+		insert into boardFile values(1, #{num}, #{fileName}, #{oriName}, #{board})
 	</insert>
 	
 	<select id="fileSelect" parameterType="BoardFileVO" resultType="BoardFileVO">

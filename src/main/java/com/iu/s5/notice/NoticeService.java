@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.s5.board.BoardService;
@@ -48,6 +49,7 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public int boardWrite(BoardVO boardVO, MultipartFile [] files) throws Exception {
 		// TODO Auto-generated method stub
 		
