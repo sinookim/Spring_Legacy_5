@@ -9,6 +9,8 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -22,49 +24,41 @@
 		<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
 	
-	<!--  -->
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
 	
-	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<beans:property name="order" value="0"></beans:property>
-	</beans:bean>
+	
 	
 	<interceptors>
 		<interceptor>
-			<!-- URL Pattern -->
-			<mapping path="/*"/>
-			<!-- Interceptor class -->
-			<beans:bean class="com.iu.s5.interceptor.TestInterceptor">
-			</beans:bean>
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/qna/qnaList"/>
+			<beans:ref bean="qnaInterceptor"/>
 		</interceptor>
-		
+	
 		<interceptor>
-			<!-- URL Pattern -->
+			<mapping path="/member/memberPage"/>
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+	
+		<interceptor>
 			<mapping path="/notice/*"/>
 			<exclude-mapping path="/notice/noticeList"/>
 			<exclude-mapping path="/notice/noticeSelect"/>
-			<!-- 생성한 객체 참조 -->
 			<beans:ref bean="noticeInterceptor"/>
 		</interceptor>
-		
+	
 		<interceptor>
 			<!-- URL Pattern -->
-			<mapping path="/member/memberPage"/>
-			<!-- 생성한 객체 참조 -->
-			<beans:ref bean="memberInterceptor"/>
+			<mapping path="/*"/>
+			
+			<!-- 적용할 Interceptor class -->
+			<beans:bean class="com.iu.s5.interceptor.TestInterceptor"></beans:bean>
 		</interceptor>
-		
-		<interceptor>
-			<!-- URL Pattern -->
-			<mapping path="/qna/*"/>
-			<exclude-mapping path="/qna/qnaList"/>
-			<!-- 생성한 객체 참조 -->
-			<beans:ref bean="qnaInterceptor"/>
-		</interceptor>
-		
+	
 	</interceptors>
+	
 	
 	<context:component-scan base-package="com.iu.s5" />
 	
