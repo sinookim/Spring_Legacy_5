@@ -1,5 +1,8 @@
 package com.iu.s5.transfer;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Transfer {
 	
 	public void bus(int money) {
