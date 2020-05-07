@@ -56,4 +56,16 @@
 	
 	<tx:annotation-driven proxy-target-class="true"/>
 
+	<!-- transaction advice 역할 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* com.iu.s5..*Service.*(..))" id="requriedTx"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="requriedTx" />
+	</aop:config>
+
 </beans>
